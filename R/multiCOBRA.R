@@ -12,40 +12,40 @@
 # multiCOBRA
 #
 #' Perform multiple COBRA runs
-#' 
+#'
 #' Perform multiple COBRA runs. Each run starts with a different seed so that a different
 #' start point, a different initial design and different random restarts are choosen.
-#' 
-#' Side effect: An error plot showing each run and the mean and median of all runs (see 
+#'
+#' Side effect: An error plot showing each run and the mean and median of all runs (see  
 #' \code{\link{multiRunPlot}}). The results (\code{dfAll} and others) are saved to
 #' \code{<fName>.Rdata}.
-#' 
-#'  @param fn         objective function that is to be minimized, should return a vector of the 
-#'                    objective function value and the constraint values
-#'  @param lower      lower bound of search space
-#'  @param upper      upper bound of search space
-#'  @param nrun       [10] number of runs
-#'  @param feval      [200] function evaluations per run
-#'  @param funcName   ["GXX"] name of the problem
-#'  @param fName      file name .Rdata where the results (\code{dfAll} and others) are saved
-#'                    (only if saveRdata==TRUE)
-#'  @param path       [NULL] optional path 
-#'  @param cobra      [NULL] list with COBRA settings. If NULL and for elements not present in
-#'                    this list, the defaults from \code{\link{cobraInit}} are used. 
-#'  @param optim      [NULL] the true optimum (or best known value) of the problem
-#'  @param target     [0.05] a single run meets the target, if the final error is smaller than \code{target}
-#'  @param ylim       the y limits
-#'  @param plotPDF    [FALSE] if TRUE, plot not only to current graphics device but 
-#'                    to \code{<fName>.pdf} as well
-#'  @param saveRdata  [FALSE] if TRUE, save results (dfAll,optim,target,fName,funcName) on fName                  
-#'  @param startSeed  [41]
 #'
-#'  @return \code{mres}, a list containing
+#' @param fn         objective function that is to be minimized, should return a vector of the 
+#'                   objective function value and the constraint values
+#' @param lower      lower bound of search space
+#' @param upper      upper bound of search space
+#' @param nrun       [10] number of runs
+#' @param feval      [200] function evaluations per run
+#' @param funcName   ["GXX"] name of the problem
+#' @param fName      the results (\code{dfAll} and others) are saved to \code{<fname>.Rdata}
+#'                   (only if saveRdata==TRUE)
+#' @param path       [NULL] optional path 
+#' @param cobra      [NULL] list with COBRA settings. If NULL, initialize \code{cobra}
+#'                   with a suitable call to \code{\link{cobraInit}}. 
+#' @param optim      [NULL] the true optimum (or best known value) of the problem (only for diagnostics)
+#' @param target     [0.05] a single run meets the target, if the final error is smaller than \code{target}
+#' @param ylim       the y limits
+#' @param plotPDF    [FALSE] if TRUE, plot not only to current graphics device but 
+#'                   to \code{<fName>.pdf} as well
+#' @param saveRdata  [FALSE] if TRUE, save results (dfAll,optim,target,fName,funcName) on \code{<fName>.Rdata}                  
+#' @param startSeed  [41] after each run the seed is incremented by 1, starting with \code{startSeed}
+#'
+#' @return \code{mres}, a list containing
 #'      \item{\code{cobra}}{ the settings and results from \strong{last} run }
 #'      \item{\code{dfAll}}{ a data frame with a result summary for \strong{all} runs (see below) }
 #'      \item{\code{z}}{ a vector containing for each run the ever-best feasible objective value}
 #'      \item{\code{z2}}{ a data frame containing for each run the minimum error 
-#'                        (if \code{optim} is available)}
+#'                        (if \code{optim} is available)} \cr 
 #'
 #'   The data frame \code{dfAll} contains one row per iteration with columns (among others)
 #'   \describe{
@@ -64,9 +64,9 @@
 #' @examples
 #' ## solve G11 problem nrun times  and plot the results of all nrun runs
 #' nrun=4
-#' feval=30
+#' feval=25
 #' 
-#' ## Defining the constraint problem: G11
+#' ## Defining the constrained problem (G11)
 #' fn <- function(x) {
 #'   y<-x[1]*x[1]+((x[2]-1)^2)
 #'   y<-as.numeric(y)
@@ -76,29 +76,28 @@
 #'   return(c(objective=y, g1=g1))
 #' }
 #' funcName="G11"
-#' d=2
-#' nConstraints<-1
 #' lower<-c(-1,-1) 
 #' upper<-c(+1,+1) 
 #' 
 #' ## Initializing and running cobra
 #' cobra <- cobraInit(xStart=c(0,0), fn=fn, fName=funcName, lower=lower, upper=upper,
-#'                    nConstraints=nConstraints,  feval=feval,
-#'                    initDesPoints=3*d, DOSAC=1,cobraSeed=1)
+#'                    feval=feval, initDesPoints=3*2, DOSAC=1, cobraSeed=1)
 #' 
 #' mres <- multiCOBRA(fn,lower,upper,nrun=nrun,feval=feval,optim=0.75
 #'                   ,cobra=cobra,funcName=funcName
 #'                   ,ylim=c(1e-12,1e-0),plotPDF=FALSE,startSeed=42)
 #' 
-#' #Two true solutions at x1* = c(-sqrt(0.5),0.5) and x2* = c(+sqrt(0.5),0.5)
-#' #where the true optimum is f(x1*) = f(x2*) = -0.75
+#' ## There are two true solutions at 
+#' ## solu1 = c(-sqrt(0.5),0.5) and solu2 = c(+sqrt(0.5),0.5)
+#' ## where the true optimum is f(solu1) = f(solu2) = -0.75
+#' ## The solution from SACOBRA is close to one of the true solutions:
 #' print(getXbest(mres$cobra))
 #' print(getFbest(mres$cobra))
 #' print(mres$z2)
 #' 
 #' 
 #' @seealso   \code{\link{multiRunPlot}}, \code{\link{cobraPhaseII}}
-#' @author Wolfgang Konen, Samineh Bagheri, Cologne Univeristy of Applied Sciences
+#' @author Wolfgang Konen, Samineh Bagheri, Cologne University of Applied Sciences
 #' @export
 #'     
 multiCOBRA <- function(fn,lower,upper,nrun=10,feval=200
@@ -124,9 +123,9 @@ multiCOBRA <- function(fn,lower,upper,nrun=10,feval=200
                        fName=fName,
                        lower=lower, # lower bound constraints
                        upper=upper, # upper bound constraints
-                       nConstraints=nConstraints,  # number of inequality constraints
+                       #nConstraints=nConstraints,  # number of inequality constraints
                        feval=feval,       # maximum number of function evaluations
-                       initDesPoints=3*d, 
+                       initDesPoints=3*dimension, 
                        cobraSeed=cobraSeed
                        )
     
@@ -148,6 +147,7 @@ multiCOBRA <- function(fn,lower,upper,nrun=10,feval=200
                      ,fitSur=cobraRun$df$predY
                      ,feas=cobraRun$df$feasible
                      ,feval=cobraRun$df$FEval
+                     ,operation=cobraRun$RSDONE
                      ,XI=c(rep(NA,cobraRun$initDesPoints),cobraRun$df2$XI)
                      ,everBestFeas=cobraRun$df$Best
                      ,run=rep(run,nrow(cobraRun$df))

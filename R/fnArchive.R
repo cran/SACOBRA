@@ -16,7 +16,7 @@
 #' 
 #' @return \code{fnArchiveF}, a function which is a wrapper for \code{fn} and stores as a side effect the argument x and 
 #'        the return value of \code{fn} in soluArchive and funcArchive, resp. These archives can be 
-#'        retrieved at any time with \cr 
+#'        retrieved at any time with \cr
 #'            \code{(environment(fnArchiveF))$getSoluArchive()}  and \cr
 #'            \code{(environment(fnArchiveF))$getFuncArchive()}  
 #' 
@@ -36,10 +36,11 @@ fnArchiveFactory <- function(fn) {
   getSoluArchive <- function() { return(soluArchive) }
   getFuncArchive <- function() { return(funcArchive) }
   
-  #' execute \code{res=fn(x)}, store x in soluArchive and res in funcArchive
-  #' 
-  #' @param x
-  #' @keywords internal 
+  # execute \code{res=fn(x)}, store x in soluArchive and res in funcArchive
+  # 
+  # @param x
+  # @return res
+  # @keywords internal 
   fnArchiveF <- function(x) {
     res <- ffx(x);
     if (!is.null(soluArchive)) testit::assert("Dimension mismatch soluArchive <--> x",length(x)==ncol(soluArchive))

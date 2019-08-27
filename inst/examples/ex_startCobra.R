@@ -24,25 +24,28 @@ fName="G01"
 d=13
 lower=rep(0,d)
 upper=c(rep(1,9),rep(100,3),1)
-nConstraints=9
 set.seed(1)
 xStart<-runif(d,min=lower,max=upper)
 
 ## Initializing cobra
 cobra <- cobraInit(xStart=xStart, fn=fn, fName=fName, lower=lower, upper=upper,
-                   nConstraints=nConstraints,  feval=70,
-                   initDesPoints=3*d, DOSAC=1,cobraSeed=1)
+                   feval=70, initDesPoints=3*d, DOSAC=1, cobraSeed=1)
 
 ## Running cobra optimizer
 cobra <- startCobra(cobra)
-#The true solution is at x* = c(rep(1,9),rep(3,3),1)
-#where the true optimum is f(x*) = -15
+## The true solution is at solu = c(rep(1,9),rep(3,3),1)
+## where the true optimum is f(solu) = optim = -15
+## The solutions from SACOBRA is close to this:
 print(getXbest(cobra))
 print(getFbest(cobra))
 
 ## Plot the resulting error (best-so-far feasible optimizer result - true optimum)
 ## on a logarithmic scale:
-fb=cobra$df$Best
-fb[1:(which(cobra$df$feasible)[1]-1)] <- NA  # invalidate iterates before the 1st feasible point
-plot(fb-(-15),log="y",type="l",ylab="error",xlab="iteration")
+optim = -15
+# ---
+#fb=cobra$df$Best
+#fb[1:(which(cobra$df$feasible)[1]-1)] <- NA  # invalidate iterates before the 1st feasible point
+# --- this is now done at the end of cobraPhaseII
+
+plot(cobra$df$Best-optim,log="y",type="l",ylab="error",xlab="iteration",main=fName)
 

@@ -11,7 +11,7 @@ isres2<-function (x0, fn, lower, upper, hin = NULL, heq = NULL, maxeval = 10000,
   fn <- function(x) fun(x, ...)
   if (!is.null(hin)) {
     .hin <- match.fun(hin)
-    hin <- function(x) (-1) * .hin(x)
+    hin <- function(x) (-1) * .hin(x, ...)
   }
   if (!is.null(heq)) {
     .heq <- match.fun(heq)

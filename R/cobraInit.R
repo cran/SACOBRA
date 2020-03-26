@@ -216,12 +216,14 @@ cobraInit <- function(xStart, fn, fName, lower, upper, feval,
   
   
   testit::assert("cobraInit: Too many init design points", initDesPoints<feval)
-
+  
   CONSTRAINED=T
   xStartEval<-fn(xStart)
   nConstraints<-length(xStartEval)-1
   if(nConstraints==0)CONSTRAINED<-F
   assert("This version does not support conditioning analysis for constrained problems ",!CONSTRAINED || !conditioningAnalysis$active)
+ if(!CONSTRAINED)testit::assert("cobraInit: This version does not support trust Region functionality for unconstrained Problems", !TrustRegion )
+  
   # old version
   # testit::assert("cobraInit: There should be at least one constraint!",nConstraints>0)
   # NEW[27.09.2017] the software accepts unconstarined problems
@@ -517,8 +519,12 @@ cobraInit <- function(xStart, fn, fName, lower, upper, feval,
   ########################################################################################################
   #testit::assert("Gres is not a matrix!",is.matrix(Gres) || nConstraints!=0)
  
-
- 
+  #Added by SB 26.03.2020
+  if (utils::packageVersion("nloptr") <= "1.2.2.1"){
+    options(nloptr.show.inequality.warning = FALSE)
+  }
+  
+  
   A<-I  # A contains all evaluated points
   n<-nrow(A)
   cobra<-list(fn=fn,

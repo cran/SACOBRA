@@ -424,13 +424,11 @@ cobraPhaseII <- function(cobra){
     #as long as no transformation of the fitness function is done, the models are simply generated as follows. 
      if(!cobra$TFlag) cobra <- trainSurrogates(cobra);  # side effect: cobra$constraintSurrogates, cobra$fitnessSurrogate
      
-   # browser()
+
     #whitening transfomartion
     if(cobra$CA$active && any(cobra$CA$ITER<=nrow(cobra$A))){
       cobra$TFlag<-T  #transformation flag
       VALIDTRANSORFMATION<-T
-      
-      
       
       #surrogate of fitness function
       sfunc<-function(x){
@@ -489,12 +487,16 @@ cobraPhaseII <- function(cobra){
       }
       
     
+      
+      
     #-----only debug purposes---------#
     # realF is only used for diagnosis purposes and the real function calls are not stored in the archive    
-     realF<-function(x){
-       y<-cobra$fnNOarchive(x)[1]
-       return(y)
-     }   
+    # realF<-function(x){
+    #   y<-cobra$fnNOarchive(x)[1]
+    #   return(y)
+    # }   
+    #  print(hesse)
+      #print(numDeriv::grad(fitfunc,x=cobra$xbest))
      #the visHess function plots the hessian matrix error
      #deprecated
      #if(cobra$CA$visHessianError) visHess(OHesse=hesse,cobra)

@@ -4,8 +4,17 @@
 \alias{evalReal}
 \title{Evaluate new iterate on real function(s)}
 \usage{
-evalReal(cobra, ev1, xNew, fValue, feval, optimConv, optimTime, currentEps,
-  fitnessSurrogate = cobra$fitnessSurrogate)
+evalReal(
+  cobra,
+  ev1,
+  xNew,
+  fValue,
+  feval,
+  optimConv,
+  optimTime,
+  currentEps,
+  fitnessSurrogate = cobra$fitnessSurrogate
+)
 }
 \arguments{
 \item{cobra}{an object of class COBRA, this is a (long) list containing all settings

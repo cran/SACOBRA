@@ -4,22 +4,60 @@
 \alias{cobraInit}
 \title{Initial phase for SACOBRA optimizer}
 \usage{
-cobraInit(xStart, fn, fName, lower, upper, feval, initDesign = "LHS",
-  initDesPoints = 2 * length(xStart) + 1, initDesOptP = NULL,
-  initBias = 0.005, skipPhaseI = TRUE, seqOptimizer = "COBYLA",
-  seqFeval = 1000, seqTol = 1e-06, ptail = TRUE, squares = TRUE,
-  conTol = 0, DOSAC = 1, sac = defaultSAC(DOSAC), repairInfeas = FALSE,
-  ri = defaultRI(), RBFmodel = "cubic", RBFwidth = -1,
-  GaussRule = "One", widthFactor = 1, RBFrho = 0, MS = defaultMS(),
-  equHandle = defaultEquMu(), rescale = TRUE, newlower = -1,
-  newupper = 1, XI = DRCL, TrustRegion = FALSE, TRlist = defaultTR(),
-  conditioningAnalysis = defaultCA(), penaF = c(3, 1.7, 3e+05),
-  sigmaD = c(3, 2, 100), constraintHandling = "DEFAULT", verbose = 1,
-  verboseIter = 10, DEBUG_RBF = defaultDebugRBF(), DEBUG_TR = FALSE,
-  DEBUG_TRU = FALSE, DEBUG_RS = FALSE, DEBUG_XI = FALSE,
-  trueFuncForSurrogates = FALSE, saveIntermediate = FALSE,
-  saveSurrogates = FALSE, epsilonInit = NULL, epsilonMax = NULL,
-  solu = NULL, cobraSeed = 42)
+cobraInit(
+  xStart,
+  fn,
+  fName,
+  lower,
+  upper,
+  feval,
+  initDesign = "LHS",
+  initDesPoints = 2 * length(xStart) + 1,
+  initDesOptP = NULL,
+  initBias = 0.005,
+  skipPhaseI = TRUE,
+  seqOptimizer = "COBYLA",
+  seqFeval = 1000,
+  seqTol = 1e-06,
+  ptail = TRUE,
+  squares = TRUE,
+  conTol = 0,
+  DOSAC = 1,
+  sac = defaultSAC(DOSAC),
+  repairInfeas = FALSE,
+  ri = defaultRI(),
+  RBFmodel = "cubic",
+  RBFwidth = -1,
+  GaussRule = "One",
+  widthFactor = 1,
+  RBFrho = 0,
+  MS = defaultMS(),
+  equHandle = defaultEquMu(),
+  rescale = TRUE,
+  newlower = -1,
+  newupper = 1,
+  XI = DRCL,
+  TrustRegion = FALSE,
+  TRlist = defaultTR(),
+  conditioningAnalysis = defaultCA(),
+  penaF = c(3, 1.7, 3e+05),
+  sigmaD = c(3, 2, 100),
+  constraintHandling = "DEFAULT",
+  verbose = 1,
+  verboseIter = 10,
+  DEBUG_RBF = defaultDebugRBF(),
+  DEBUG_TR = FALSE,
+  DEBUG_TRU = FALSE,
+  DEBUG_RS = FALSE,
+  DEBUG_XI = FALSE,
+  trueFuncForSurrogates = FALSE,
+  saveIntermediate = FALSE,
+  saveSurrogates = FALSE,
+  epsilonInit = NULL,
+  epsilonMax = NULL,
+  solu = NULL,
+  cobraSeed = 42
+)
 }
 \arguments{
 \item{xStart}{a vector of dimension \code{d} containing the starting point for the optimization problem}
@@ -192,7 +230,7 @@ relevant for penalty-based internal optimizers \code{\link[dfoptim]{nmkb}} or HJ
 for default optimizer \code{\link[nloptr]{cobyla}}.
 
 Although the software was originally designed to handle only constrained optimization problems, 
-it can also address unconstrained optimization problems
+it can also address unconstrained optimization problems  
 
 How to code which constraint is equality constraint? - Function \code{fn} should return 
 an \eqn{(1+m+r)}-dimensional vector with named elements. The first element is the objective, the 

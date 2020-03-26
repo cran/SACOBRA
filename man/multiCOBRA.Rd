@@ -4,10 +4,23 @@
 \alias{multiCOBRA}
 \title{Perform multiple COBRA runs}
 \usage{
-multiCOBRA(fn, lower, upper, nrun = 10, feval = 200, funcName = "GXX",
-  fName = paste0("mult-", funcName, ".Rdata"), path = NULL, cobra = NULL,
-  optim = NULL, target = 0.05, saveRdata = FALSE, ylim = c(1e-05,
-  10000), plotPDF = FALSE, startSeed = 41)
+multiCOBRA(
+  fn,
+  lower,
+  upper,
+  nrun = 10,
+  feval = 200,
+  funcName = "GXX",
+  fName = paste0("mult-", funcName, ".Rdata"),
+  path = NULL,
+  cobra = NULL,
+  optim = NULL,
+  target = 0.05,
+  saveRdata = FALSE,
+  ylim = c(1e-05, 10000),
+  plotPDF = FALSE,
+  startSeed = 41
+)
 }
 \arguments{
 \item{fn}{objective function that is to be minimized, should return a vector of the 

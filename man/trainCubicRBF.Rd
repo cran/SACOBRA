@@ -4,8 +4,15 @@
 \alias{trainCubicRBF}
 \title{Fit cubic RBF interpolation to training data X for d>1.}
 \usage{
-trainCubicRBF(xp, U, ptail = TRUE, squares = FALSE, rho = 0,
-  DEBUG2 = FALSE, width = NA)
+trainCubicRBF(
+  xp,
+  U,
+  ptail = TRUE,
+  squares = FALSE,
+  rho = 0,
+  DEBUG2 = FALSE,
+  width = NA
+)
 }
 \arguments{
 \item{xp}{n points \eqn{x_i} of dimension d are arranged in (n x d) matrix \code{xp}}

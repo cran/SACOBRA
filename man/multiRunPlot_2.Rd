@@ -4,10 +4,21 @@
 \alias{multiRunPlot_2}
 \title{Plot the results from multipe COBRA runs.}
 \usage{
-multiRunPlot_2(dfAll, solu, fName = "multiRun", main = "", xlim = NULL,
-  ylim = c(1e-05, 10000), ylog = TRUE, xlog = FALSE, target = 0.05,
-  plotPDF = FALSE, subPDF = NULL, legendWhere = "topright",
-  absErr = FALSE)
+multiRunPlot_2(
+  dfAll,
+  solu,
+  fName = "multiRun",
+  main = "",
+  xlim = NULL,
+  ylim = c(1e-05, 10000),
+  ylog = TRUE,
+  xlog = FALSE,
+  target = 0.05,
+  plotPDF = FALSE,
+  subPDF = NULL,
+  legendWhere = "topright",
+  absErr = FALSE
+)
 }
 \arguments{
 \item{dfAll}{the data frame of all runs, obtained with \code{\link{multiCOBRA}} or loaded 

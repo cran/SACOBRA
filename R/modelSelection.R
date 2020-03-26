@@ -181,7 +181,7 @@ counter1<-counter0
   #frameR<-nrow(cobra$ApproxFrame[[1]][acceptedIndices,])
   frameR<-length(acceptedIndices)
   MedianFrame<-NULL
- # browser()
+  
   if(any(models=="cubic")){
   if(slidingW && frameR>WinS){
        MedianFrame<-data.frame(model="cubic",t(apply(data.frame(data.frame(cobra$ApproxFrame$cubic[acceptedIndices,])[c(max(frameR-WinS,1):frameR),]),2,FUN=function(x){
@@ -192,7 +192,8 @@ counter1<-counter0
       tempFrame<-cobra$ApproxFrame$cubic[acceptedIndices,]
     
     else
-      tempFrame<-data.frame(t(cobra$ApproxFrame$cubic[acceptedIndices,]))
+      tempFrame<-data.frame(matrix(cobra$ApproxFrame$cubic[acceptedIndices,],nrow=length(acceptedIndices),ncol=cobra$nConstraints+1))
+      #tempFrame<-data.frame(t(cobra$ApproxFrame$cubic[acceptedIndices,]))
     
     MedianFrame<-data.frame(model="cubic",t(apply(tempFrame,2,FUN=function(x){
       return(quantile(x)[quant])
@@ -202,7 +203,7 @@ counter1<-counter0
     names(MedianFrame)<-mycolNames
     
   }
-  
+
   
 
   if(any(models=="Gaussian")){ 
@@ -224,7 +225,8 @@ counter1<-counter0
       if(is.matrix(cobra$ApproxFrame[[index]][acceptedIndices,]))
         tempFrame<-cobra$ApproxFrame[[index]][acceptedIndices,]
       else
-        tempFrame<-data.frame(t(cobra$ApproxFrame[[index]][acceptedIndices,]))
+        tempFrame<-data.frame(matrix(cobra$ApproxFrame$cubic[acceptedIndices,],nrow=length(acceptedIndices),ncol=cobra$nConstraints+1))
+      #  tempFrame<-data.frame(t(cobra$ApproxFrame[[index]][acceptedIndices,]))
       
       MedianFrame<-rbind(MedianFrame,
                          data.frame(model=paste("Gaussian",width,sep=""),t(apply(tempFrame,2,FUN=function(x){
@@ -254,7 +256,8 @@ counter1<-counter0
         if(is.matrix(cobra$ApproxFrame[[index]][acceptedIndices,]))
           tempFrame<-cobra$ApproxFrame[[index]][acceptedIndices,]
         else
-          tempFrame<-data.frame(t(cobra$ApproxFrame[[index]][acceptedIndices,]))
+          tempFrame<-data.frame(matrix(cobra$ApproxFrame$cubic[acceptedIndices,],nrow=length(acceptedIndices),ncol=cobra$nConstraints+1))
+          #tempFrame<-data.frame(t(cobra$ApproxFrame[[index]][acceptedIndices,]))
         
         
         newTemp<-data.frame(model=paste("MQ",width,sep=""),t(apply(tempFrame,2,FUN=function(x){
@@ -267,12 +270,20 @@ counter1<-counter0
     } 
   }
   ModelName<-as.character(MedianFrame$model)
+  
+  #MedianFrame is a n times m data.frame, where n is the number of models in the pool of models and m is 2+nConstarints. 
+  #The first columnn constains strings (The name of the RBF types) the second column is the approximate error for the objective function
+  #The rest of columsn are the representing the approximate error for constraint functions
+  testit::assert("MedianFrame dimension is wrong:",ncol(MedianFrame)==cobra$nConstraints+2)
+  
+  
   cobra$selectedModel<-rbind(cobra$selectedModel,apply(data.frame(MedianFrame[,-1]),2,function(x){
       index<-which(x==min(x))
       index<-index[1]
       y<-ModelName[index]
        return(y)
              }))
+  #cobra$selectedModel is dataframe with 1+nConstarints columns
   print(paste(cobra$selectedModel[nrow(cobra$selectedModel),]))
   return(cobra)
 }

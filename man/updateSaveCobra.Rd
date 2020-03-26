@@ -4,8 +4,18 @@
 \alias{updateSaveCobra}
 \title{Update and save cobra}
 \usage{
-updateSaveCobra(cobra, ev1, subMin, sigmaD, penaF, gama, EPS, fitFuncPenalRBF,
-  distRequirement, fitnessSurrogate = cobra$fitnessSurrogate)
+updateSaveCobra(
+  cobra,
+  ev1,
+  subMin,
+  sigmaD,
+  penaF,
+  gama,
+  EPS,
+  fitFuncPenalRBF,
+  distRequirement,
+  fitnessSurrogate = cobra$fitnessSurrogate
+)
 }
 \arguments{
 \item{cobra}{an object of class COBRA, this is a (long) list containing all settings

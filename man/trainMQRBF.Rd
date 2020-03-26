@@ -4,8 +4,17 @@
 \alias{trainMQRBF}
 \title{Fit multiquadric RBF model to training data for d>1.}
 \usage{
-trainMQRBF(xp, U, ptail = TRUE, squares = FALSE, width, RULE = "One",
-  widthFactor = 1, rho = 0, DEBUG2 = F)
+trainMQRBF(
+  xp,
+  U,
+  ptail = TRUE,
+  squares = FALSE,
+  width,
+  RULE = "One",
+  widthFactor = 1,
+  rho = 0,
+  DEBUG2 = F
+)
 }
 \arguments{
 \item{xp}{n points \eqn{x_i} of dimension d are arranged in (n x d) matrix \code{xp}}

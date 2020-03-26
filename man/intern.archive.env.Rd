@@ -4,7 +4,9 @@
 \name{intern.archive.env}
 \alias{intern.archive.env}
 \title{Archiving Environment}
-\format{An object of class \code{environment} of length 0.}
+\format{
+An object of class \code{environment} of length 0.
+}
 \usage{
 intern.archive.env
 }

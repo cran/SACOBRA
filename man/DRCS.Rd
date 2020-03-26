@@ -4,7 +4,9 @@
 \name{DRCS}
 \alias{DRCS}
 \title{Distance Requirement Cycle, short version}
-\format{An object of class \code{numeric} of length 2.}
+\format{
+An object of class \code{numeric} of length 2.
+}
 \usage{
 DRCS
 }

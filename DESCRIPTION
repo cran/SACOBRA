@@ -1,8 +1,8 @@
 Package: SACOBRA
 Type: Package
 Title: Self-Adjusting COBRA
-Version: 1.1
-Date: 2019-08-15
+Version: 1.2
+Date: 2020-03-26
 Author: Wolfgang Konen <wolfgang.konen@th-koeln.de> [aut], 
  Samineh Bagheri <samineh.bagheri@th-koeln.de> [aut,cre],
  Patrick Koch [aut], Thomas Baeck <t.h.w.baeck@liacs.leidenuniv.nl> [aut]
@@ -22,8 +22,8 @@ Collate: 'cobraInit.R' 'cobraPhaseI.R' 'cobraPhaseII.R' 'debugModel.R'
         'repairChootinan.R' 'repairInfeasRI2.R' 'SACOBRA.R'
         'startCobra.R' 'trainSurrogates.R' 'trustRegion.R'
         'updateSaveCobra.R' 'Gproblems.R'
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.0
 NeedsCompilation: no
-Packaged: 2019-08-26 16:59:22 UTC; bagheri
+Packaged: 2020-03-26 15:51:20 UTC; bagheri
 Repository: CRAN
-Date/Publication: 2019-08-27 23:50:02 UTC
+Date/Publication: 2020-03-26 16:10:02 UTC

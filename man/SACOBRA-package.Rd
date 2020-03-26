@@ -38,7 +38,7 @@ These extensions include: \cr
 7) self-adjusting DRC (distance requirement cycle) selection, \cr
 8) online model selection to select the best type of RBF for objective and constraint functions, \cr
 9) online whitening for unconstrained optimization of functions with high conditioning. \cr
-(Please note that the online whitening implementation is still underway and at this stage it is not recommended to be applied to expensive problems)
+(Please note that the online whitening implementation is still underway and at this stage it is not recommended to be applied to expensive problems) 
 
 SACOBRA performs optimization with a minimum of true function evaluations. It has proven
 to work well on problems with high dimensions (e.g. d=124) and many constraints (e.g. 60).
